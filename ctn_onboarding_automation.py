@@ -7,7 +7,7 @@ import csv
 
 
 if __name__ == '__main__':
-    config = Config('instance')
+    config = Config()
     tracking_sheet = Sheet(config.get_file_path())
     q = QualtricsQuery(config.get_survey_id(), config.get_api_token())
     responses = q.get_survey_response()
