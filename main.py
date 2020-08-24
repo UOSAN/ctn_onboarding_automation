@@ -24,10 +24,10 @@ if __name__ == '__main__':
         # 'column 19' -> last_name
         # 'column 38' -> ou_id (95 number)
         # 'column 40' -> duck_id
-        p = Person(r[18],
-                   r[19],
-                   r[38],
-                   r[40],
+        p = Person(r[44],
+                   r[45],
+                   r[59],
+                   r[61],
                    r[17])
         if not tracking_sheet.find_person(p):
             tracking_sheet.add_person(p)
