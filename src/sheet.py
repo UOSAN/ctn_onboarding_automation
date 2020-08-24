@@ -1,5 +1,10 @@
 from openpyxl import load_workbook
+from typing import Union
 from .person import Person
+
+
+def string_equal_ish(a: str, b: Union[str, None]):
+    return a == b or (len(a) == 0 and b is None)
 
 
 class Sheet:
@@ -17,7 +22,9 @@ class Sheet:
         found = False
         for row in ws.iter_rows(max_col=2):
             last_name, first_name = row
-            if last_name == person.last_name and first_name == person.first_name:
+            if string_equal_ish(person.last_name, last_name.value)\
+                    and string_equal_ish(person.first_name, first_name.value):
                 found = True
+                break
 
         return found
