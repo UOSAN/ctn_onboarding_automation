@@ -5,16 +5,33 @@ Usage:
     python setup.py py2app
 """
 
+import sys
+
 from setuptools import setup
+
+from app_constants import VERSION, APP_NAME
 
 APP = ['ctn_onboarding_automation.py']
 DATA_FILES = []
-OPTIONS = {'packages': ['openpyxl', 'requests'],
-           'iconfile': 'Logos.icns'}
 
-setup(
-    app=APP,
-    data_files=DATA_FILES,
-    options={'py2app': OPTIONS},
-    setup_requires=['py2app'],
-)
+
+if sys.platform == 'darwin':
+    plist = dict(CFBundleShortVersionString=VERSION,
+                 CFBundleVersion=VERSION)
+    extra_options = dict(setup_requires=['py2app'],
+                         app=APP,
+                         data_files=DATA_FILES,
+                         options=dict(py2app=dict(packages=['openpyxl', 'requests', 'appdirs'],
+                                                  iconfile='Logos.icns',
+                                                  plist=plist)))
+elif sys.platform == 'win32':
+    extra_options = dict(setup_requires=['py2exe'],
+                         app=APP,
+                         data_files=DATA_FILES,
+                         options=dict(py2exe=dict(packages=['openpyxl', 'requests', 'appdirs'])))
+else:
+    extra_options = dict()
+    pass
+
+setup(name=APP_NAME,
+      **extra_options)
