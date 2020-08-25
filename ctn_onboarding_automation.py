@@ -1,13 +1,21 @@
-from src.qualtrics import QualtricsQuery
+import csv
+import io
+import sys
+
 from src.config import Config
 from src.person import Person
+from src.qualtrics import QualtricsQuery
 from src.sheet import Sheet
-import io
-import csv
-
 
 if __name__ == '__main__':
-    config = Config()
+    if sys.platform == 'darwin':
+        path = '.'
+    elif sys.platform == 'win32':
+        path = 'resources'
+    else:
+        path = ''
+
+    config = Config(path)
     tracking_sheet = Sheet(config.get_file_path())
     q = QualtricsQuery(config.get_survey_id(), config.get_api_token())
     responses = q.get_survey_response()

@@ -21,14 +21,16 @@ if sys.platform == 'darwin':
     extra_options = dict(setup_requires=['py2app'],
                          app=APP,
                          data_files=DATA_FILES,
-                         options=dict(py2app=dict(packages=['openpyxl', 'requests', 'appdirs'],
+                         options=dict(py2app=dict(packages=['openpyxl', 'requests'],
                                                   iconfile='Logos.icns',
+                                                  resources=['config.json'],
                                                   plist=plist)))
 elif sys.platform == 'win32':
+    DATA_FILES = [('resources', ['config.json'])]
     extra_options = dict(setup_requires=['py2exe'],
                          app=APP,
                          data_files=DATA_FILES,
-                         options=dict(py2exe=dict(packages=['openpyxl', 'requests', 'appdirs'])))
+                         options=dict(py2exe=dict(packages=['openpyxl', 'requests'])))
 else:
     extra_options = dict()
     pass
