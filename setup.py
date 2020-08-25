@@ -9,7 +9,8 @@ from setuptools import setup
 
 APP = ['ctn_onboarding_automation.py']
 DATA_FILES = []
-OPTIONS = {'packages': ['openpyxl', 'requests']}
+OPTIONS = {'packages': ['openpyxl', 'requests'],
+           'iconfile': 'Logos.icns'}
 
 setup(
     app=APP,
