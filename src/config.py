@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 
 
 class Config:
@@ -15,16 +14,18 @@ class Config:
         self._config_path = path
         self._file_path = None
         self._survey_id = None
-        self._api_token = None
+        self._client_id = None
+        self._clients = None
 
     def _read_config(self):
         if self._config_path:
-            print(os.path.join(self._config_path, 'config.json'))
-            with open(os.path.join(self._config_path, 'config.json')) as f:
+            print(self._config_path)
+            with open(self._config_path) as f:
                 configuration = json.load(f)
                 self._file_path = configuration['file_path']
                 self._survey_id = configuration['survey_id']
-                self._api_token = configuration['api_token']
+                self._client_id = configuration['client_id']
+                self._clients = configuration['clients']
 
     def get_file_path(self):
         if self._file_path is None:
@@ -36,7 +37,12 @@ class Config:
             self._read_config()
         return self._survey_id
 
-    def get_api_token(self):
-        if self._api_token is None:
+    def get_client_id(self):
+        if self._client_id is None:
             self._read_config()
-        return self._api_token
+        return self._client_id
+
+    def get_clients(self):
+        if self._clients is None:
+            self._read_config()
+        return self._clients

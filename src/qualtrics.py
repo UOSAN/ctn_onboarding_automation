@@ -1,20 +1,39 @@
 import requests
 from time import sleep
 from typing import Optional
+from src.config import Config
 
 
 class QualtricsQuery:
-    def __init__(self, survey_id: str, api_token: str):
+    def __init__(self, config: Config):
         self._endpoint = 'https://ca1.qualtrics.com/API/v3'
-        self._headers = {'X-API-TOKEN': api_token}
+        self._headers = {}
         self._timeout = 5
-        self._survey_id = survey_id
+        self._survey_id = config.get_survey_id()
+        self._client_id = config.get_client_id()
+        self._clients = config.get_clients()
+
+    def _get_token(self) -> None:
+        """
+        Get OAuth token for authorization.
+        :return: None
+        """
+        url = f'https://ca1.qualtrics.com/oauth2/token'
+
+        data = {'grant_type': 'client_credentials'}
+
+        r = requests.post(url, auth=(self._client_id, self._clients), data=data)
+
+        if r.status_code == requests.codes.ok:
+            self._headers = {'Authorization': 'Bearer ' + r.json()['access_token']}
 
     def _create_response_export(self) -> Optional[str]:
         """
         Create a survey export from Qualtrics
         :return: A progress identifier
         """
+        self._get_token()
+
         url = f'{self._endpoint}/surveys/{self._survey_id}/export-responses'
 
         request_data = {'format': 'csv', 'compress': 'false', 'useLabels': 'true'}
