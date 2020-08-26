@@ -15,10 +15,10 @@ then appends that information to the end of the "- CTN Staff and Volunteer Track
 The application is built using [PyInstaller](http://www.pyinstaller.org/).
 On a Mac, the command to build `ctn_onboarding_automation.app` is
 ```
-pyinstaller --noconfirm --clean --onefile --add-data config.json:. --icons resources/Logos.icns ctn_onboarding_automation.py
+pyinstaller --noconfirm --clean --onefile --add-data config.json:. --icon resources/Logos.icns ctn_onboarding_automation.py
 ```
 
 On Windows, the command to build `ctn_onboarding_automation.exe` is
 ```
-pyinstaller --noconfirm --clean --onefile --add-data config.json;. --icons resources\logo_icon.ico ctn_onboarding_automation.py
+pyinstaller --noconfirm --clean --onefile --add-data config.json;. --icon resources\logo_icon.ico ctn_onboarding_automation.py
 ```
