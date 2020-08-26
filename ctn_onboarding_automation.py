@@ -1,5 +1,6 @@
 import csv
 import io
+import os
 import sys
 
 from src.config import Config
@@ -8,20 +9,18 @@ from src.qualtrics import QualtricsQuery
 from src.sheet import Sheet
 
 if __name__ == '__main__':
-    if sys.platform == 'darwin':
-        path = '.'
-    elif sys.platform == 'win32':
-        path = 'resources'
-    else:
-        path = ''
+    bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+    path = os.path.abspath(os.path.join(bundle_dir, 'config.json'))
 
     config = Config(path)
-    tracking_sheet = Sheet(config.get_file_path())
-    q = QualtricsQuery(config.get_survey_id(), config.get_api_token())
+
+    q = QualtricsQuery(config)
     responses = q.get_survey_response()
 
     f = io.StringIO(responses)
     reader = csv.reader(f)
+    tracking_sheet = Sheet(config.get_file_path())
+
     for i, r in enumerate(reader):
         # Skip first three rows
         if i < 3:
