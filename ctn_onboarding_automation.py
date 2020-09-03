@@ -19,7 +19,12 @@ if __name__ == '__main__':
 
     f = io.StringIO(responses)
     reader = csv.reader(f)
-    tracking_sheet = Sheet(config.get_file_path())
+    try:
+        tracking_sheet = Sheet(config.get_file_path())
+    except FileNotFoundError as e:
+        print(f'Unable to find the tracking sheet at \'{config.get_file_path()}\'.')
+        print(f'Check that you are connected to UO VPN and have connected to the CAS file server.')
+        sys.exit()
 
     for i, r in enumerate(reader):
         # Skip first three rows
