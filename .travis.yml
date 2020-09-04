@@ -11,5 +11,5 @@ install:
   - pip3 install -r requirements.txt
 
 script:
-  - pyinstaller --noconfirm --clean --onefile --icon resources\logo_icon.ico ctn_onboarding_automation.py
+  - pyinstaller --noconfirm --clean --onefile --icon 'resources\logo_icon.ico ctn_onboarding_automation.py'
   - ls -l dist
