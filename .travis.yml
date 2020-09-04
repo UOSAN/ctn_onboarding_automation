@@ -1,0 +1,23 @@
+os: windows
+language: shell
+before_install:
+  - openssl aes-256-cbc -K $encrypted_c5fd3201494e_key -iv $encrypted_c5fd3201494e_iv
+    -in config.json.enc -out config.json -d
+  - choco install python --version 3.8.0
+  - python -m pip install --upgrade pip
+env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+install:
+  - pip3 install --upgrade pip
+  - pip3 install pyinstaller
+  - pip3 install -r requirements.txt
+script:
+  - pyinstaller --noconfirm --clean --onefile --add-data 'config.json;.' --icon 'resources\logo_icon.ico' ctn_onboarding_automation.py
+deploy:
+  provider: releases
+  api_key:
+    secure: p/gpE9YZps6CTjqOmKuFtSyp3F8A3Vm9tD3wp17TO0esK300oCLZocB2FAVYgMWqmN8CMrXB/8xgZ7ZKR355bCxFZf3lz7bqhGaXCT8ZhM1uF6y1fhC70el/+dtNfMzMoNXKimfDUDjAHxN1R1mNRafHv19FQxvf/mS/vu40G2+76Nqmkyo2N28mhzhEW6NDTMOGDCccZ58+lxA3gGVaf/2mkuoqu1EF+A4YA/VgC9DU2d2QYeUtoGhuoDDOqiClLebokrkzPpqmNO2Z/9sffFFCn4XnB1FC/IZN7riBfP+3gKHto8ceo2m7YNdcr/cegrYpwPHrCCNGdHnHED+y7oBUtYlNTv1IDWDTx7An+pLYvScsuDwpVz8pb7vrIarFeA3pA6vciO7kKVUWtCGM2a+KhKJJlm2JbI0wSkmMUMLlFfpWa4fKFRSm9QwC4PaUeIrNCwryh1hOmWsz8DAKOpsjhk6cGAg0eYHyYPUgMUxn2KVWTO4rqv67nsevGY1Ny4bU++j8xl0cBd9uA9y4GhPL/ckgK7/OerXiMZLIBaG/4I3+47Ns8F5HGr42pORo+99DGrs0FVoigXgEEczIFOfnTEGsESaCZGJCH0tfESK7MUdqMbe4WU+cYLNzz54pVHJeGlVqzGp+AihJ6gNOx6skXXLQ0/rB5NvHPcWHDnE=
+  file: dist/ctn_onboarding_automation.exe
+  on:
+    repo: UOSAN/ctn_onboarding_automation
+    tags: true
+  skip_cleanup: 'true'

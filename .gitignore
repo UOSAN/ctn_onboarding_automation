@@ -131,3 +131,4 @@ dmypy.json
 
 # Ignore instance configurations file
 instance/
+config.json
