@@ -10,7 +10,6 @@ class Config:
         :param str path: Path to configuration
         """
         logging.getLogger().info(f' Configuration path is: {path}')
-        print(path)
         self._config_path = path
         self._file_path = None
         self._survey_id = None
@@ -19,7 +18,6 @@ class Config:
 
     def _read_config(self):
         if self._config_path:
-            print(self._config_path)
             with open(self._config_path) as f:
                 configuration = json.load(f)
                 self._file_path = configuration['file_path']
