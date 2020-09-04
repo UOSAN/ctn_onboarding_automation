@@ -11,4 +11,4 @@ install:
   - pip3 install pyinstaller
   - pip3 install -r requirements.txt
 script:
-  - pyinstaller --noconfirm --clean --onefile --add-data config.json;. --icon 'resources\logo_icon.ico' ctn_onboarding_automation.py
+  - pyinstaller --noconfirm --clean --onefile --add-data 'config.json;.' --icon 'resources\logo_icon.ico' ctn_onboarding_automation.py
