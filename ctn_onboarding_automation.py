@@ -37,6 +37,7 @@ if __name__ == '__main__':
                    uo_id=r[30],
                    duck_id=r[28],
                    position_type=r[24],
-                   supervisor=r[22])
+                   supervisor=r[22],
+                   confidentiality_date=r[0])
         if not tracking_sheet.find_person(p):
             tracking_sheet.add_person(p)
