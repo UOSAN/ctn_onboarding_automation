@@ -22,10 +22,12 @@ class Person:
     supervisor: str
     confidentiality_date: str
     era_commons_id: str
+    prox: str
 
     def to_list(self):
         return [self.first_name, self.last_name, self.uo_id, self.position_type, '',
                 '', '', self.supervisor, '', self.duck_id,
                 '', '', to_string(self.confidentiality_date), '', '',
                 '', '', '', '', '',
-                '', '', self.era_commons_id]
+                '', '', self.era_commons_id, '', '',
+                self.prox]
