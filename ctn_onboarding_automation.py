@@ -34,12 +34,12 @@ if __name__ == '__main__':
         # Columns start counting from 0 (first column is column 0)
         p = Person(first_name=r[17],
                    last_name=r[18],
-                   uo_id=r[30],
-                   duck_id=r[28],
+                   uo_id=r[42],
+                   duck_id=r[44],
                    position_type=r[24],
                    supervisor=r[22],
                    confidentiality_date=r[0],
-                   era_commons_id=r[32],
-                   prox=r[29])
+                   era_commons_id=r[46],
+                   prox=r[43])
         if not tracking_sheet.find_person(p):
             tracking_sheet.add_person(p)
