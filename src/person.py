@@ -9,7 +9,8 @@ class Person:
     uo_id: str
     duck_id: str
     position_type: str
+    supervisor: str
 
     def to_list(self):
         return [self.first_name, self.last_name, self.uo_id, self.position_type, '',
-                '', '', '', '', self.duck_id]
+                '', '', self.supervisor, '', self.duck_id]
