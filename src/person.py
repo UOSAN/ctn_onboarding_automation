@@ -29,5 +29,4 @@ class Person:
                 '', '', self.supervisor, '', self.duck_id,
                 '', '', to_string(self.confidentiality_date), '', '',
                 '', '', '', '', '',
-                '', '', self.era_commons_id, '', '',
-                self.prox]
+                '', '', self.era_commons_id, '', '', '', self.prox]
