@@ -2,7 +2,13 @@ from dataclasses import dataclass
 from datetime import datetime
 
 
-def to_string(confidentiality_date: str) -> str:
+def _to_string(confidentiality_date: str) -> str:
+    """
+    Convert datetime string to month/day/year format.
+
+    :param confidentiality_date: datetime string in format '%Y-%m-%d %H:%M:%S'
+    :return: a string representing the same datetime in format '%m/%d/%Y'
+    """
     # Date string is: 2020-09-08 13:30:54,
     # corresponding to format '%Y-%m-%d %H:%M:%S'.
     # Output '%m/%d/%Y', but without leading zeros so the date is 9/8/2020.
@@ -13,7 +19,7 @@ def to_string(confidentiality_date: str) -> str:
 
 @dataclass
 class Person:
-    """A simple dataclass holding some common data that will be written to the tracking sheet"""
+    """A simple dataclass holding some common data that will be written to the tracking sheet."""
     first_name: str
     last_name: str
     uo_id: str
@@ -27,6 +33,6 @@ class Person:
     def to_list(self):
         return [self.first_name, self.last_name, self.uo_id, self.position_type, '',
                 '', '', self.supervisor, '', self.duck_id,
-                '', '', to_string(self.confidentiality_date), '', '',
+                '', '', _to_string(self.confidentiality_date), '', '',
                 '', '', '', '', '',
                 '', '', self.era_commons_id, '', '', '', self.prox]
