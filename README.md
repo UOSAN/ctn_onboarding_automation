@@ -10,8 +10,8 @@ all the survey responses. It then reads the responses, extracting the informatio
 each new volunteer or employee, such as first name, last name, employee type, etc., and
 then appends that information to the end of the "- CTN Staff and Volunteer Tracking.xlsx" spreadsheet.
 
-
 ### How is it built
+
 The application is built using [PyInstaller](http://www.pyinstaller.org/).
 On a Mac, the command to build `ctn_onboarding_automation.app` is
 ```

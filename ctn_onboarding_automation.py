@@ -21,9 +21,9 @@ if __name__ == '__main__':
     reader = csv.reader(f)
     try:
         tracking_sheet = Sheet(config.get_file_path())
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         print(f'Unable to find the tracking sheet at \'{config.get_file_path()}\'.')
-        print(f'Check that you are connected to UO VPN and have connected to the CAS file server.')
+        print('Check that you are connected to UO VPN and have connected to the CAS file server.')
         sys.exit()
 
     for i, r in enumerate(reader):

@@ -6,6 +6,11 @@ from src.config import Config
 
 class QualtricsQuery:
     def __init__(self, config: Config):
+        """
+        Create QualtricsQuery to query for Qualtrics survey results.
+
+        :param Config config: Configuration for query
+        """
         self._endpoint = 'https://ca1.qualtrics.com/API/v3'
         self._headers = {}
         self._timeout = 5
@@ -16,9 +21,10 @@ class QualtricsQuery:
     def _get_token(self) -> None:
         """
         Get OAuth token for authorization.
+
         :return: None
         """
-        url = f'https://ca1.qualtrics.com/oauth2/token'
+        url = 'https://ca1.qualtrics.com/oauth2/token'
 
         data = {'grant_type': 'client_credentials'}
 
@@ -29,7 +35,8 @@ class QualtricsQuery:
 
     def _create_response_export(self) -> Optional[str]:
         """
-        Create a survey export from Qualtrics
+        Create a survey export from Qualtrics.
+
         :return: A progress identifier
         """
         self._get_token()
@@ -45,7 +52,8 @@ class QualtricsQuery:
 
     def _get_response_export_progress(self, export_progress_id: Optional[str]) -> Optional[str]:
         """
-        Get the fileId of the survey export, by repeatedly querying for progress until the status is complete
+        Get the fileId of the survey export, by repeatedly querying for progress until the status is complete.
+
         :param export_progress_id: A progress identifier
         :return: A file identifier
         """
@@ -69,7 +77,8 @@ class QualtricsQuery:
 
     def _get_response_export_file(self, file_id: str):
         """
-        Get the exported survey results
+        Get the exported survey results.
+
         :param file_id: File identifier of the exported survey
         :return: A string in JSON format containing all survey responses
         """
@@ -85,6 +94,11 @@ class QualtricsQuery:
             raise ValueError('Could not get JSON response of surveys')
 
     def get_survey_response(self) -> str:
+        """
+        Get the survey response.
+
+        :return str: A string in JSON format containing all survey responses
+        """
         export_progress_id = self._create_response_export()
         file_id = self._get_response_export_progress(export_progress_id)
         return self._get_response_export_file(file_id)
