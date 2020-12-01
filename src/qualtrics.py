@@ -18,7 +18,7 @@ class QualtricsQuery:
         Get OAuth token for authorization.
         :return: None
         """
-        url = f'https://ca1.qualtrics.com/oauth2/token'
+        url = 'https://ca1.qualtrics.com/oauth2/token'
 
         data = {'grant_type': 'client_credentials'}
 
