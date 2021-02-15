@@ -1,20 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime
 
-
-def _to_string(confidentiality_date: str) -> str:
-    """
-    Convert datetime string to month/day/year format.
-
-    :param confidentiality_date: datetime string in format '%Y-%m-%d %H:%M:%S'
-    :return: a string representing the same datetime in format '%m/%d/%Y'
-    """
-    # Date string is: 2020-09-08 13:30:54,
-    # corresponding to format '%Y-%m-%d %H:%M:%S'.
-    # Output '%m/%d/%Y', but without leading zeros so the date is 9/8/2020.
-
-    conf_date = datetime.strptime(confidentiality_date, '%Y-%m-%d %H:%M:%S')
-    return f'{conf_date.month}/{conf_date.day}/{conf_date:%Y}'
+from src.utils import to_string
 
 
 @dataclass
@@ -40,7 +26,7 @@ class Person:
                 self.duck_id,
                 '',  # CITI expiration
                 '',  # GCP expiration
-                _to_string(self.confidentiality_date),
+                to_string(self.confidentiality_date),
                 '',  # Background cleared
                 '',  # Student FERPA release
                 '',  # Volunteer FY16 risk form
