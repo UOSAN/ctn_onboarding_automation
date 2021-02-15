@@ -1,6 +1,8 @@
-from openpyxl import load_workbook
 from typing import Union
-from .person import Person
+
+from openpyxl import load_workbook
+
+from src.person import Person
 
 
 def string_equal_ish(a: str, b: Union[str, None]):
