@@ -31,8 +31,45 @@ class Person:
     prox: str
 
     def to_list(self):
-        return [self.first_name, self.last_name, self.uo_id, self.position_type, '',
-                '', '', self.supervisor, '', self.duck_id,
-                '', '', _to_string(self.confidentiality_date), '', '',
-                '', '', '', '', '',
-                '', '', self.era_commons_id, '', '', '', self.prox]
+        return [self.first_name, self.last_name, self.uo_id, self.position_type,
+                '',  # Employee class
+                '',  # Title
+                '',  # PI
+                self.supervisor,
+                '',  # Project
+                self.duck_id,
+                '',  # CITI expiration
+                '',  # GCP expiration
+                _to_string(self.confidentiality_date),
+                '',  # Background cleared
+                '',  # Student FERPA release
+                '',  # Volunteer FY16 risk form
+                '',  # Volunteer FY16 risk form
+                '',  # Volunteer FY17 risk form
+                '',  # Volunteer FY18 risk form
+                '',  # Volunteer FY19 risk form
+                '',  # Volunteer FY20 risk form
+                '',  # Volunteer FY21 risk form
+                '',  # Personal vehicle
+                self.era_commons_id,
+                '',  # eRA Commons role
+                '',  # Individual office keys
+                self.prox,
+                '',  # LISB Exterior
+                '',  # LISB 1st Floor
+                '',  # LISB 2nd Floor
+                '',  # LISB 3rd Floor
+                '',  # LISB 340/423
+                '',  # LISB Mgmt/Submaster
+                '',  # STB Exterior
+                '',  # STB Basement
+                '',  # STB 064
+                '',  # LCNI
+                '',  # PSI Exterior
+                '',  # PSI 103 Punch Code
+                '',  # PSI 107 Punch Code
+                '',  # PSI Common Key
+                '',  # Bike Cages
+                '',  # Other Access/Keys
+                ''  # Notes
+                ]
