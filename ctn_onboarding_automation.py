@@ -7,6 +7,7 @@ from src.config import Config
 from src.person import Person
 from src.qualtrics import QualtricsQuery
 from src.sheet import Sheet
+from src.utils import to_string
 
 if __name__ == '__main__':
     bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
@@ -42,4 +43,6 @@ if __name__ == '__main__':
                    era_commons_id=r[46],
                    prox=r[43])
         if not tracking_sheet.find_person(p):
-            tracking_sheet.add_person(p)
+            added_date = r[1]
+            note = f'Added on {to_string(added_date)}'
+            tracking_sheet.add_person(p, note)

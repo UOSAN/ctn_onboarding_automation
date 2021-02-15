@@ -1,20 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime
 
-
-def _to_string(confidentiality_date: str) -> str:
-    """
-    Convert datetime string to month/day/year format.
-
-    :param confidentiality_date: datetime string in format '%Y-%m-%d %H:%M:%S'
-    :return: a string representing the same datetime in format '%m/%d/%Y'
-    """
-    # Date string is: 2020-09-08 13:30:54,
-    # corresponding to format '%Y-%m-%d %H:%M:%S'.
-    # Output '%m/%d/%Y', but without leading zeros so the date is 9/8/2020.
-
-    conf_date = datetime.strptime(confidentiality_date, '%Y-%m-%d %H:%M:%S')
-    return f'{conf_date.month}/{conf_date.day}/{conf_date:%Y}'
+from src.utils import to_string
 
 
 @dataclass
@@ -30,9 +16,46 @@ class Person:
     era_commons_id: str
     prox: str
 
-    def to_list(self):
-        return [self.first_name, self.last_name, self.uo_id, self.position_type, '',
-                '', '', self.supervisor, '', self.duck_id,
-                '', '', _to_string(self.confidentiality_date), '', '',
-                '', '', '', '', '',
-                '', '', self.era_commons_id, '', '', '', self.prox]
+    def to_list(self, note: str):
+        return [self.first_name, self.last_name, self.uo_id, self.position_type,
+                '',  # Employee class
+                '',  # Title
+                '',  # PI
+                self.supervisor,
+                '',  # Project
+                self.duck_id,
+                '',  # CITI expiration
+                '',  # GCP expiration
+                to_string(self.confidentiality_date),
+                '',  # Background cleared
+                '',  # Student FERPA release
+                '',  # Volunteer FY16 risk form
+                '',  # Volunteer FY16 risk form
+                '',  # Volunteer FY17 risk form
+                '',  # Volunteer FY18 risk form
+                '',  # Volunteer FY19 risk form
+                '',  # Volunteer FY20 risk form
+                '',  # Volunteer FY21 risk form
+                '',  # Personal vehicle
+                self.era_commons_id,
+                '',  # eRA Commons role
+                '',  # Individual office keys
+                self.prox,
+                '',  # LISB Exterior
+                '',  # LISB 1st Floor
+                '',  # LISB 2nd Floor
+                '',  # LISB 3rd Floor
+                '',  # LISB 340/423
+                '',  # LISB Mgmt/Submaster
+                '',  # STB Exterior
+                '',  # STB Basement
+                '',  # STB 064
+                '',  # LCNI
+                '',  # PSI Exterior
+                '',  # PSI 103 Punch Code
+                '',  # PSI 107 Punch Code
+                '',  # PSI Common Key
+                '',  # Bike Cages
+                '',  # Other Access/Keys
+                note  # Notes
+                ]

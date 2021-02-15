@@ -1,6 +1,8 @@
-from openpyxl import load_workbook
 from typing import Union
-from .person import Person
+
+from openpyxl import load_workbook
+
+from src.person import Person
 
 
 def string_equal_ish(a: str, b: Union[str, None]):
@@ -12,9 +14,9 @@ class Sheet:
         self._wb = load_workbook(filename=file_name)
         self._file_name = file_name
 
-    def add_person(self, person: Person):
+    def add_person(self, person: Person, note: str):
         ws = self._wb.active
-        ws.append(person.to_list())
+        ws.append(person.to_list(note))
         self._wb.save(self._file_name)
 
     def find_person(self, person: Person):
