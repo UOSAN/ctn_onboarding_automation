@@ -16,7 +16,7 @@ class Person:
     era_commons_id: str
     prox: str
 
-    def to_list(self):
+    def to_list(self, note: str):
         return [self.first_name, self.last_name, self.uo_id, self.position_type,
                 '',  # Employee class
                 '',  # Title
@@ -57,5 +57,5 @@ class Person:
                 '',  # PSI Common Key
                 '',  # Bike Cages
                 '',  # Other Access/Keys
-                ''  # Notes
+                note  # Notes
                 ]
