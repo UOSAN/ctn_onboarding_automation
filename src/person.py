@@ -17,7 +17,7 @@ class Person:
     prox: str
 
     def to_list(self, note: str):
-        return [self.first_name, self.last_name, self.uo_id, self.position_type,
+        return [self.last_name, self.first_name, self.uo_id, self.position_type,
                 '',  # Employee class
                 '',  # Title
                 '',  # PI
