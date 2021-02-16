@@ -61,13 +61,13 @@ class WorkerThread(Thread):
                        era_commons_id=r[46],
                        prox=r[43])
             if not tracking_sheet.find_person(p):
-                wx.PostEvent(self._notify_window, ResultEvent(data=f'Updating: {r[18]}'))
+                wx.PostEvent(self._notify_window, ResultEvent(data=f'Adding: {r[18]}'))
 
                 added_date = r[1]
                 note = f'Added on {to_string(added_date)}'
                 tracking_sheet.add_person(p, note)
 
-        wx.PostEvent(self._notify_window, ResultEvent(data='Completed!'))
+        wx.PostEvent(self._notify_window, ResultEvent(data='Complete!'))
 
     def abort(self):
         """Abort worker thread."""
