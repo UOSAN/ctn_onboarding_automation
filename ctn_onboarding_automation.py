@@ -41,7 +41,13 @@ class WorkerThread(Thread):
             wx.PostEvent(self._notify_window, ResultEvent(data=f'Opening tracking sheet at: {config.get_file_path()}'))
             tracking_sheet = Sheet(config.get_file_path())
         except FileNotFoundError:
-            wx.PostEvent(self._notify_window, ResultEvent(data=f'Unable to find the tracking sheet at \'{config.get_file_path()}\''))
+            wx.PostEvent(self._notify_window, ResultEvent(data=f'ERROR: Unable to find the tracking sheet at \'{config.get_file_path()}\''))
+            wx.PostEvent(self._notify_window, ResultEvent(data='Could not update sheet'))
+            return
+
+        # Check worksheet size
+        if tracking_sheet.size_changed():
+            wx.PostEvent(self._notify_window, ResultEvent(data='ERROR: Unexpected number of columns. App needs update.'))
             wx.PostEvent(self._notify_window, ResultEvent(data='Could not update sheet'))
             return
 
