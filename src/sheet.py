@@ -4,6 +4,8 @@ from openpyxl import load_workbook
 
 from src.person import Person
 
+NUM_COLUMNS = 42
+
 
 def string_equal_ish(a: str, b: Union[str, None]):
     return a == b or (len(a) == 0 and b is None)
@@ -30,3 +32,7 @@ class Sheet:
                 break
 
         return found
+
+    def size_changed(self):
+        ws = self._wb.active
+        return len(ws.column_dimensions) != NUM_COLUMNS
