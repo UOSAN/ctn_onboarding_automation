@@ -19,9 +19,8 @@ ResultEvent, EVT_RESULT = wx.lib.newevent.NewEvent()
 
 # Thread class that executes processing
 class WorkerThread(Thread):
-    """Worker Thread Class."""
     def __init__(self, notify_window):
-        """Init Worker Thread Class."""
+        """Initialize worker thread."""
         Thread.__init__(self)
         self._notify_window = notify_window
         self._want_abort = 0
@@ -30,7 +29,7 @@ class WorkerThread(Thread):
         self.start()
 
     def run(self):
-        """Run Worker Thread."""
+        """Run worker thread."""
         wx.PostEvent(self._notify_window, ResultEvent(data="Contacting Qualtrics..."))
         q = QualtricsQuery(config)
         responses = q.get_survey_response()
@@ -71,25 +70,24 @@ class WorkerThread(Thread):
         wx.PostEvent(self._notify_window, ResultEvent(data='Completed!'))
 
     def abort(self):
-        """abort worker thread."""
+        """Abort worker thread."""
         # Method for use by main thread to signal an abort
         self._want_abort = 1
 
 
 # GUI Frame class that spins off the worker thread
 class MainFrame(wx.Frame):
-    """Class MainFrame."""
     def __init__(self, parent, id):
         """Create the MainFrame."""
         wx.Frame.__init__(self, parent, id, title='CTN Onboarding Automation', size=wx.Size(900, 600))
 
-        # Dumb sample frame with two buttons
+        # Simple frame with only text
         self.status = wx.StaticText(self, -1, '', pos=(0,100))
 
         # Set up event handler for any worker thread results
         self.Bind(EVT_RESULT, self.OnResult)
 
-        # And indicate we don't have a worker thread yet
+        # And start up the worker thread
         self.worker = WorkerThread(self)
 
     def OnResult(self, event):
@@ -103,9 +101,8 @@ class MainFrame(wx.Frame):
 
 
 class MainApp(wx.App):
-    """Class Main App."""
     def OnInit(self):
-        """Init Main App."""
+        """Initialize Main App."""
         self.frame = MainFrame(None, -1)
         self.frame.Show(True)
         self.SetTopWindow(self.frame)
