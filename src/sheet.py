@@ -4,7 +4,7 @@ from openpyxl import load_workbook
 
 from src.person import Person
 
-NUM_COLUMNS = 42
+NUM_COLUMNS = 45
 
 
 def string_equal_ish(a: str, b: Union[str, None]):
@@ -35,4 +35,4 @@ class Sheet:
 
     def size_changed(self):
         ws = self._wb.active
-        return len(ws.column_dimensions) != NUM_COLUMNS
+        return ws.max_column != NUM_COLUMNS
